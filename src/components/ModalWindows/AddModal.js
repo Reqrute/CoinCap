@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import { Modal as Window, ModalBody,ModalClose,ModalContent,ModalDialog,ModalFooter,ModalHeader } from './component';
 
 
-export default function AddModal  ({ isVisible = false, onClose }){
+export default function AddModal  ({ isVisible = false, onClose , zzz , rank}){
   const keydownHandler = ({ key }) => {
     switch (key) {
       case 'Escape':
@@ -21,7 +21,7 @@ export default function AddModal  ({ isVisible = false, onClose }){
     <Window className="modal" onClick={onClose}>
       <ModalDialog onClick={e => e.stopPropagation()}>
         <ModalHeader>
-          <h3>Add Crypto</h3>
+          <h3>Add Crypto {zzz} {rank} </h3>
           <ModalClose onClick={onClose}>
             &times;
           </ModalClose>

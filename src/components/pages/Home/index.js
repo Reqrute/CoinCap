@@ -1,12 +1,14 @@
 import { Table, Coins,} from './component'
 import { useEffect, useState } from 'react'
 import AddModal from '../../ModalWindows/AddModal'
+import { Link } from 'react-router-dom';
 
 
 export default function Home() {
 
     const [coins, setCoins] = useState([]);
     const [isModal, setModal] = useState(false);
+    const [name, setName] = useState('');
 
     useEffect(()=>{
         const fetchCoins = async() =>{
@@ -15,8 +17,9 @@ export default function Home() {
             setCoins(data.data)
         }
             fetchCoins(); 
-        },[]
+        }
     )
+
 
   return (
     <Coins>
@@ -37,9 +40,10 @@ export default function Home() {
 
         <tbody>
             {coins.map(({id,name, rank, priceUsd,marketCapUsd,vwap24Hr,supply,volumeUsd24Hr,changePercent24Hr})=> (
-
-                <tr key = {id}>
-                    <td>{rank}</td>
+                    <tr key = {id}>       
+                    <td>
+                    <Link to={`/${id}`}>{rank}</Link>
+                    </td>
                     <td>{name}</td>
                     <td>${parseFloat(priceUsd).toFixed(2)}</td>
                     <td>${parseFloat(marketCapUsd/1000000).toFixed(2)}m</td>
@@ -47,17 +51,17 @@ export default function Home() {
                     <td>{parseFloat(supply/1000000).toFixed(2)}m</td>
                     <td>${parseFloat(volumeUsd24Hr/1000000).toFixed(2)}m</td>
                     <td>{parseFloat(changePercent24Hr).toFixed(2)}%</td>
-                    <td><button onClick={() => setModal(true)}>+</button></td>
-
+                    <td><button  key = {id} onClick={() => {setModal(true); setName(id)}}>+</button></td>   
                 </tr>
             ))}
         </tbody>
-
-        </Table>
-        <AddModal
+ <AddModal
+                    zzz = {name}
         isVisible={isModal}
         onClose={() => setModal(false)}
       />
+        </Table>
+
     </Coins>
   )
 }
