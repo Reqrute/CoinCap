@@ -42,7 +42,7 @@ export default function Home() {
             {coins.map(({id,name, rank, priceUsd,marketCapUsd,vwap24Hr,supply,volumeUsd24Hr,changePercent24Hr})=> (
                     <tr key = {id}>       
                     <td>
-                    <Link to={`/${id}`}>{rank}</Link>
+                    <Link to={`/${id}`} style={{textDecoration: 'none' , color: 'black'}}>{rank}</Link>
                     </td>
                     <td>{name}</td>
                     <td>${parseFloat(priceUsd).toFixed(2)}</td>
