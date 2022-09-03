@@ -6,6 +6,7 @@ import {
 } from './/component'
 
 import { useEffect, useState } from 'react'
+import Portfel from '../ModalWindows/Portfel';
 
 
 
@@ -13,6 +14,8 @@ import { useEffect, useState } from 'react'
 export default function Header() {
 
  const [coins, setCoins] = useState([]);
+ const [isModal, setModal] = useState(false);
+
 
 useEffect(()=>{
     const fetchCoins = async() =>{
@@ -37,10 +40,14 @@ return (
 ))}
       </Top>
 
-        <button>
+        <button onClick={() => setModal(true)}> 
             Портфель
         </button>
 
+        <Portfel
+        isVisible={isModal}
+        onClose={() => setModal(false)}
+      />
     </AppHeader>
   )
 }

@@ -1,10 +1,12 @@
 import { Table, Coins,} from './component'
 import { useEffect, useState } from 'react'
+import AddModal from '../../ModalWindows/AddModal'
 
 
 export default function Home() {
 
     const [coins, setCoins] = useState([]);
+    const [isModal, setModal] = useState(false);
 
     useEffect(()=>{
         const fetchCoins = async() =>{
@@ -45,12 +47,17 @@ export default function Home() {
                     <td>{parseFloat(supply/1000000).toFixed(2)}m</td>
                     <td>${parseFloat(volumeUsd24Hr/1000000).toFixed(2)}m</td>
                     <td>{parseFloat(changePercent24Hr).toFixed(2)}%</td>
-                    <td><button>+</button></td>
+                    <td><button onClick={() => setModal(true)}>+</button></td>
+
                 </tr>
             ))}
         </tbody>
 
         </Table>
+        <AddModal
+        isVisible={isModal}
+        onClose={() => setModal(false)}
+      />
     </Coins>
   )
 }
