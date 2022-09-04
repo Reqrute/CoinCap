@@ -13,7 +13,7 @@ export default function Home() {
     const [limit, setlimit] = useState(20);
     let navigate = useNavigate();
 
-    function zxc(id){
+    function swap(id){
         navigate(`/${id}`);
     }
 
@@ -49,7 +49,7 @@ export default function Home() {
             {coins.map(({id,name, rank, priceUsd,marketCapUsd,vwap24Hr,supply,volumeUsd24Hr,changePercent24Hr})=> (
                     <tr key = {id}
                     style={{cursor:'pointer'}} 
-                    onClick={() => zxc(id)}>       
+                    onClick={() => swap(id)}>       
                     <td>{rank}</td>
                     <td>{name}</td>
                     <td>${parseFloat(priceUsd).toFixed(2)}</td>
@@ -60,14 +60,14 @@ export default function Home() {
                     {changePercent24Hr > 0 ?
                      (<td style={{color:'green'}}>{parseFloat(changePercent24Hr).toFixed(2)}%</td>) : 
                      (<td style={{color:'red'}}>{parseFloat(changePercent24Hr).toFixed(2)}%</td>) }
-                    <td><button  key = {id} onClick={(event) => {setModal(true); setName(id); event.stopPropagation();
+                    <td><button  key = {id} onClick={(event) => {setModal(true); setName(name); event.stopPropagation();
                     console.log(id);}}>+</button></td>   
                 </tr>
             ))}
         </tbody>
         </Table>
         <AddModal
-                    zzz = {name}
+                    name = {name}
         isVisible={isModal}
         onClose={() => setModal(false)}
       />

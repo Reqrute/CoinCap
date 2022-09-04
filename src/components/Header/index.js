@@ -6,7 +6,8 @@ import {
 } from './/component'
 
 import { useEffect, useState } from 'react'
-import Portfel from '../ModalWindows/Portfel';
+import Wallet from '../ModalWindows/Wallet';
+import store from '../../redux/store';
 
 
 
@@ -44,10 +45,16 @@ return (
         <button onClick={() => setModal(true)}
         style={{margin:'1rem'}}
         > 
-            Портфель
+            Wallet
         </button>
 
-        <Portfel
+        <button onClick={() =>console.log(store.getState()) }
+        style={{margin:'1rem'}}
+        > 
+            adada
+        </button>
+
+        <Wallet
         isVisible={isModal}
         onClose={() => setModal(false)}
       />

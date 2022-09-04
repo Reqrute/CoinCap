@@ -58,4 +58,15 @@ export const ModalContent = styled.div`
 padding: 1rem;
 `
 
+export const Btn = styled.button`
+    display:block;
+    margin-right: 5px;
+    border:0.5px solid;
+    border-radius:0.3rem;
+    font-family:inherit;
+    font-size:1rem;
+    padding:10px;
+`
+
+
   
