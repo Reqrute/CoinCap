@@ -1,7 +1,8 @@
-import { Table, Coins,} from './component'
+import { Table, Coins,Next} from './component'
 import { useEffect, useState } from 'react'
 import AddModal from '../../ModalWindows/AddModal'
-import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
 
 
 export default function Home() {
@@ -9,10 +10,16 @@ export default function Home() {
     const [coins, setCoins] = useState([]);
     const [isModal, setModal] = useState(false);
     const [name, setName] = useState('');
+    const [limit, setlimit] = useState(20);
+    let navigate = useNavigate();
+
+    function zxc(id){
+        navigate(`/${id}`);
+    }
 
     useEffect(()=>{
         const fetchCoins = async() =>{
-            const res = await fetch('https:api.coincap.io/v2/assets?limit=20');
+            const res = await fetch(`https:api.coincap.io/v2/assets?limit=${limit}`);
             const data = await res.json();
             setCoins(data.data)
         }
@@ -40,27 +47,34 @@ export default function Home() {
 
         <tbody>
             {coins.map(({id,name, rank, priceUsd,marketCapUsd,vwap24Hr,supply,volumeUsd24Hr,changePercent24Hr})=> (
-                    <tr key = {id}>       
-                    <td>
-                    <Link to={`/${id}`} style={{textDecoration: 'none' , color: 'black'}}>{rank}</Link>
-                    </td>
+                    <tr key = {id}
+                    style={{cursor:'pointer'}} 
+                    onClick={() => zxc(id)}>       
+                    <td>{rank}</td>
                     <td>{name}</td>
                     <td>${parseFloat(priceUsd).toFixed(2)}</td>
                     <td>${parseFloat(marketCapUsd/1000000).toFixed(2)}m</td>
                     <td>${parseFloat(vwap24Hr).toFixed(2)}</td> 
                     <td>{parseFloat(supply/1000000).toFixed(2)}m</td>
                     <td>${parseFloat(volumeUsd24Hr/1000000).toFixed(2)}m</td>
-                    <td>{parseFloat(changePercent24Hr).toFixed(2)}%</td>
-                    <td><button  key = {id} onClick={() => {setModal(true); setName(id)}}>+</button></td>   
+                    {changePercent24Hr > 0 ?
+                     (<td style={{color:'green'}}>{parseFloat(changePercent24Hr).toFixed(2)}%</td>) : 
+                     (<td style={{color:'red'}}>{parseFloat(changePercent24Hr).toFixed(2)}%</td>) }
+                    <td><button  key = {id} onClick={(event) => {setModal(true); setName(id); event.stopPropagation();
+                    console.log(id);}}>+</button></td>   
                 </tr>
             ))}
         </tbody>
- <AddModal
+        </Table>
+        <AddModal
                     zzz = {name}
         isVisible={isModal}
         onClose={() => setModal(false)}
       />
-        </Table>
+
+      <div>
+        <Next onClick={() => setlimit(limit+20)}>Next</Next>
+      </div>
 
     </Coins>
   )

@@ -14,7 +14,7 @@ export const Header = styled.div`
   padding-bottom:10px;
 `
 
-export const Top = styled.p`
+export const Top = styled.div`
   font-size: 1rem;
   font-weight: normal;
   color: #ffffff;

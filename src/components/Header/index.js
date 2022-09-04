@@ -32,15 +32,18 @@ return (
       <Top>
       {coins.map(({id,name, rank, priceUsd})=> (
 
-<p key = {id}>
+     <span key = {id}
+     style={{padding:'1rem'}}>
     {rank}.
     {name} &nbsp;
      ${parseFloat(priceUsd).toFixed(2)}
-</p>
+     </span>
 ))}
       </Top>
 
-        <button onClick={() => setModal(true)}> 
+        <button onClick={() => setModal(true)}
+        style={{margin:'1rem'}}
+        > 
             Портфель
         </button>
 
